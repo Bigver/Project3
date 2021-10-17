@@ -5,8 +5,20 @@ from PIL import ImageTk
 import random
 import sys
 import os
+import threading
 
 
+#ฟังก์ชันอักษร
+def go(counter=0):
+    word = "Welcome To VOCAB LIFE"
+    if counter == len(word):
+        l.config(text=word[:counter])
+        counter = 0
+        GUI.after(200, lambda: go(counter+1))
+
+    else:
+        l.config(text = word[:counter])
+        GUI.after(200, lambda: go(counter+1))
 #ฟังก์ชันก์เปลีี่ยนเฟรม
 def raise_frame(frame):
     frame.tkraise()
@@ -81,15 +93,50 @@ GUI.iconbitmap('C:/Users/09723/Desktop/project1.1/icon1.ico')  #icon app ก็�
 
 
 
-#frame มี 5 เฟรม
+#frame มี 6 เฟรม
+f0 = Frame(GUI,width = 500,height = 500)  
 f1 = Frame(GUI,width = 500,height = 500)  
 f2 = Frame(GUI,width = 500,height = 500)
 f3 = Frame(GUI,width = 500,height = 500)
 f4 = Frame(GUI,width = 500,height = 500)
 f5 = Frame(GUI,width = 500,height = 500)
 
-for frame in (f1, f2, f3, f4, f5):  # ลูปเอาไว้เปลี่ยนเฟรม
+for frame in (f0 ,f1, f2, f3, f4, f5):  # ลูปเอาไว้เปลี่ยนเฟรม
     frame.grid(row=1, column=1, sticky='news')
+    
+##############################################################################
+
+welcome = Canvas(
+    f0,
+    bg = "#ffffff",
+    height = 500,
+    width = 500,
+    bd = 0,
+    highlightthickness = 0,
+    relief = "ridge")
+welcome.place(x = 0, y = 0)
+
+backgroundstart = PhotoImage(file = f"background0.png")
+background_s = welcome.create_image(
+    250.0, 250.0,
+    image=backgroundstart)
+
+start = PhotoImage(file = f"start.png")
+buttonstart = Button(f0,
+    image = start,
+    borderwidth = 0,
+    command = lambda:raise_frame(f1),
+    highlightthickness = 0,
+    relief = "flat")
+
+buttonstart.place(
+    x = 207, y = 161,
+    width = 90,
+    height = 38)
+
+l = Label(f0,font=("Comic sans MS",20,'bold',"italic"),fg= 'white',bg= 'RoyalBlue')
+l.place(x=60,y=70)
+threading.Thread(target = GUI.after,args = [200,go]).start()
 
 
 #######################Frame 1##########################
@@ -686,5 +733,5 @@ b11111.place(
 
 ###########################################################
 
-raise_frame(f1)
+raise_frame(f0)
 GUI.mainloop()
