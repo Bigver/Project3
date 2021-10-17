@@ -28,6 +28,7 @@ def restart_program():
     GUI.destroy()
     os.startfile("Project1.1.py")
 #################################################   codeที่เก็บข้อมูล  SQL 1
+#################################################   codeที่เก็บข้อมูล  SQL 1
 import sqlite3  
 
 conn = sqlite3.connect('Life.db') ####ใส่ไฟล์ database.db
@@ -41,10 +42,11 @@ c.execute("""CREATE TABLE IF NOT EXISTS vocab(
 
 def insert_vocabLife(vocabLife,meaningLife):
     ID = None
+    score = 0
     with conn: #with คำสั่งเปิดปิด
         c.execute("""INSERT INTO vocab VALUES (?,?,?,?)""",
-                  (ID,vocabLife,meaningLife))
-    conn.commit() #คำสั่งsave voca
+                  (ID,vocabLife,meaningLife,score))
+    conn.commit() #คำสั่งsave vocab
     print('Data was inserted Vocab Life')
 
 def view_vocabLife():
@@ -68,9 +70,10 @@ son.execute("""CREATE TABLE IF NOT EXISTS vocab(
 
 def insert_vocabAca(vocabAca,meaningAca):
     ID = None
+    score = 0
     with sonn: #with คำสั่งเปิดปิด
         son.execute("""INSERT INTO vocab VALUES (?,?,?,?)""",
-                  (ID,vocabAca,meaningAca))
+                  (ID,vocabAca,meaningAca,score))
     sonn.commit() #คำสั่งsave vocab
     print('Data was inserted Vocab Academic')
 
@@ -461,11 +464,11 @@ rv_vocab.set('Vocabulary')
 rv_meaning = StringVar()
 rv_meaning.set('Meaning')
 
-R1 = Label(f4,textvariable = rv_vocab,font = fonttext,fg = 'DarkSlateGray2',bg = 'RoyalBlue')
+R1 = Label(f4,textvariable = rv_vocab,font = fonttext,fg = 'black',bg = 'RoyalBlue')
 R1.place(x = 110, y = 300)
 
 
-R2 = Label(f4,textvariable = rv_meaning,font = fonttext,fg = 'DarkSlateBlue',bg = 'WhiteSmoke')
+R2 = Label(f4,textvariable = rv_meaning,font = fonttext,fg = 'black',bg = 'SlateBlue1')
 R2.place(x = 300, y = 300)
 
 
@@ -534,7 +537,7 @@ score = 0
 status_str = StringVar()
 status_str.set(str(score))
 show_status = Label(f4, textvariable = status_str,font = fonttext1,bg = 'Lavender',fg = 'black')
-show_status.place(x = 460 ,y =15)
+show_status.place(x = 460 ,y =10)
 
 
 
@@ -684,7 +687,7 @@ score1 = 0
 status_str1 = StringVar()
 status_str1.set(str(score1))
 show_status1 = Label(f5, textvariable = status_str1,font = fonttext1,bg = 'Lavender',fg = 'black')
-show_status1.place(x = 460 ,y =15)
+show_status1.place(x = 460 ,y =10)
 
 
 
